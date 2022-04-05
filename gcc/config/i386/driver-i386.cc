@@ -404,6 +404,9 @@ const char *host_detect_local_cpu (int argc, const char **argv)
   if (argc < 2)
     return NULL;
 
+  if (getenv("GCC_ARCH_NATIVE_OVERRIDE"))
+    return concat ("-m", argv[0], "=", getenv("GCC_ARCH_NATIVE_OVERRIDE"), options, NULL);
+
   arch = !strcmp (argv[0], "arch");
 
   if (!arch && strcmp (argv[0], "tune"))
