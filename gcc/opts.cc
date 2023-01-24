@@ -3443,10 +3443,20 @@ set_debug_level (uint32_t dinfo, int extended, const char *arg,
 	 at level 3, don't lower it.  */
       if (*arg == '\0')
 	{
-	  if (dinfo == CTF_DEBUG)
-	    opts->x_ctf_debug_info_level = CTFINFO_LEVEL_NORMAL;
-	  else if (opts->x_debug_info_level < DINFO_LEVEL_NORMAL)
-	    opts->x_debug_info_level = DINFO_LEVEL_NORMAL;
+	  if (getenv ("CLEAR_DEBUG_TERSE") != NULL)
+	    {
+	      if (dinfo == CTF_DEBUG)
+		opts->x_ctf_debug_info_level = CTFINFO_LEVEL_TERSE;
+	      else if (opts->x_debug_info_level < DINFO_LEVEL_TERSE)
+		opts->x_debug_info_level = DINFO_LEVEL_TERSE;
+	    }
+	  else
+	    {
+	      if (dinfo == CTF_DEBUG)
+		opts->x_ctf_debug_info_level = CTFINFO_LEVEL_NORMAL;
+	      else if (opts->x_debug_info_level < DINFO_LEVEL_NORMAL)
+		opts->x_debug_info_level = DINFO_LEVEL_NORMAL;
+	    }
 	}
       else
 	{
