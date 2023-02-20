@@ -402,6 +402,7 @@ find_file_in_dir (cpp_reader *pfile, _cpp_file *file, bool *invalid_pch,
 #endif
 	 )
 	{
+#if 0
 	  char * canonical_path = maybe_shorter_path (path);
 	  if (canonical_path)
 	    {
@@ -410,6 +411,7 @@ find_file_in_dir (cpp_reader *pfile, _cpp_file *file, bool *invalid_pch,
 	      free (path);
 	      path = canonical_path;
 	    }
+#endif
 	}
 
       hv = htab_hash_string (path);
